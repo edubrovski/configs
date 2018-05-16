@@ -1,0 +1,49 @@
+[global_config]
+  suppress_multiple_term_dialog = True
+  title_transmit_bg_color = "#729fcf"
+[keybindings]
+  switch_to_tab_1 = <Alt>1
+  switch_to_tab_2 = <Alt>2
+  switch_to_tab_3 = <Alt>3
+  switch_to_tab_4 = <Alt>4
+  switch_to_tab_5 = <Alt>5
+  switch_to_tab_6 = <Alt>6
+[layouts]
+  [[default]]
+    [[[child0]]]
+      fullscreen = False
+      last_active_window = True
+      maximised = True
+      order = 0
+      parent = ""
+      position = 1366:27
+      size = 1920, 1016
+      title = eddie@eddie-thinkpad: ~
+      type = Window
+    [[[child1]]]
+      active_page = 0
+      labels = apps, work
+      last_active_term = fde2bd31-3559-4cf5-9e19-4e5732601f8d, b13d9eb1-f3ab-461d-bf83-6b669ad28efd
+      order = 0
+      parent = child0
+      type = Notebook
+    [[[terminal2]]]
+      order = 0
+      parent = child1
+      profile = default
+      title = apps
+      type = Terminal
+      uuid = fde2bd31-3559-4cf5-9e19-4e5732601f8d
+    [[[terminal3]]]
+      order = 1
+      parent = child1
+      profile = default
+      type = Terminal
+      uuid = b13d9eb1-f3ab-461d-bf83-6b669ad28efd
+[plugins]
+[profiles]
+  [[default]]
+    background_darkness = 0.8
+    background_type = transparent
+    cursor_color = "#aaaaaa"
+    foreground_color = "#ffffff"
