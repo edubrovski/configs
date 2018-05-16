@@ -1,0 +1,4 @@
+to enable run
+systemctl enable antizapret.vpn.service
+
+openvpn config can be downloaded from antizapret website
