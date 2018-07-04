@@ -1,4 +1,4 @@
-map <C-n> :action GotoClass<CR>
+map gc :action GotoClass<CR>
 map gi :action GotoImplementation<CR>
 map gf :action Forward<CR>
 map gb :action Back<CR>
