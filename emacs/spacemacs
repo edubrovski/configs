@@ -64,7 +64,17 @@ This function should only modify configuration layer settings."
    ;; `dotspacemacs/user-config'. To use a local version of a package, use the
    ;; `:location' property: '(your-package :location "~/path/to/your-package/")
    ;; Also include the dependencies as they will not be resolved automatically.
-   dotspacemacs-additional-packages '(haskell-mode)
+   dotspacemacs-additional-packages '(
+                                      haskell-mode
+                                      scala-mode
+                                      sbt-mode
+                                      lsp-metals
+                                      lsp-ui
+                                      yasnippet
+                                      company
+                                      posframe
+                                      dap-mode
+                                      )
 
    ;; A list of packages that cannot be updated.
    dotspacemacs-frozen-packages '()
@@ -550,8 +560,84 @@ before packages are loaded."
 
   (setq haskell-process-type 'cabal-repl)
 
-  (when (version<= "26.0.50" emacs-version )
-    (global-display-line-numbers-mode))
+  (global-display-line-numbers-mode)
+
+  ;; ========================== Scala-related stuff
+
+  ;; Enable scala-mode for highlighting, indentation and motion commands
+  (use-package scala-mode
+    :interpreter
+    ("scala" . scala-mode))
+
+  ;; Enable sbt mode for executing sbt commands
+  (use-package sbt-mode
+    :commands sbt-start sbt-command
+    :config
+    ;; WORKAROUND: https://github.com/ensime/emacs-sbt-mode/issues/31
+    ;; allows using SPACE when in the minibuffer
+    (substitute-key-definition
+     'minibuffer-complete-word
+     'self-insert-command
+     minibuffer-local-completion-map)
+    ;; sbt-supershell kills sbt-mode:  https://github.com/hvesalai/emacs-sbt-mode/issues/152
+    (setq sbt:program-options '("-Dsbt.supershell=false"))
+    )
+
+  ;; Enable nice rendering of diagnostics like compile errors.
+  (use-package flycheck
+    :init (global-flycheck-mode))
+
+  (use-package lsp-mode
+    ;; Optional - enable lsp-mode automatically in scala files
+    :hook  (scala-mode . lsp)
+    (lsp-mode . lsp-lens-mode)
+    :config
+    ;; Uncomment following section if you would like to tune lsp-mode performance according to
+    ;; https://emacs-lsp.github.io/lsp-mode/page/performance/
+    ;;       (setq gc-cons-threshold 100000000) ;; 100mb
+    ;;       (setq read-process-output-max (* 1024 1024)) ;; 1mb
+    ;;       (setq lsp-idle-delay 0.500)
+    ;;       (setq lsp-log-io nil)
+    ;;       (setq lsp-completion-provider :capf)
+    (setq lsp-prefer-flymake nil))
+
+  ;; Add metals backend for lsp-mode
+  (use-package lsp-metals)
+
+  ;; Enable nice rendering of documentation on hover
+  ;;   Warning: on some systems this package can reduce your emacs responsiveness significally.
+  ;;   (See: https://emacs-lsp.github.io/lsp-mode/page/performance/)
+  ;;   In that case you have to not only disable this but also remove from the packages since
+  ;;   lsp-mode can activate it automatically.
+  (use-package lsp-ui)
+
+  ;; lsp-mode supports snippets, but in order for them to work you need to use yasnippet
+  ;; If you don't want to use snippets set lsp-enable-snippet to nil in your lsp-mode settings
+  ;;   to avoid odd behavior with snippets and indentation
+  (use-package yasnippet)
+
+  ;; Use company-capf as a completion provider.
+  ;;
+  ;; To Company-lsp users:
+  ;;   Company-lsp is no longer maintained and has been removed from MELPA.
+  ;;   Please migrate to company-capf.
+  (use-package company
+    :hook (scala-mode . company-mode)
+    :config
+    (setq lsp-completion-provider :capf))
+
+  ;; Use the Debug Adapter Protocol for running tests and debugging
+  (use-package posframe
+    ;; Posframe is a pop-up tool that must be manually installed for dap-mode
+    )
+  (use-package dap-mode
+    :hook
+    (lsp-mode . dap-mode)
+    (lsp-mode . dap-ui-mode)
+    )
+
+  ;; TODO: delete this
+  (setq package-check-signature nil)
 )
 
 
@@ -574,7 +660,7 @@ This function is called at the very end of Spacemacs initialization."
      ("nongnu" . "https://elpa.nongnu.org/nongnu/")
      ("melpa-stable" . "http://stable.melpa.org/packages/")))
  '(package-selected-packages
-   '(yapfify stickyfunc-enhance sphinx-doc pytest pyenv-mode pydoc py-isort poetry transient pippel pipenv pyvenv pip-requirements nose lsp-python-ms lsp-pyright live-py-mode importmagic epc ctable concurrent deferred helm-pydoc helm-gtags helm-cscope xcscope ggtags dap-mode bui cython-mode counsel-gtags counsel swiper ivy company-anaconda blacken anaconda-mode pythonic haskell-mode ws-butler writeroom-mode winum which-key volatile-highlights vi-tilde-fringe uuidgen use-package undo-tree treemacs-projectile treemacs-persp treemacs-icons-dired treemacs-evil toc-org symon symbol-overlay string-inflection string-edit spaceline-all-the-icons restart-emacs request rainbow-delimiters quickrun popwin pcre2el password-generator paradox overseer org-superstar open-junk-file nameless multi-line macrostep lorem-ipsum link-hint inspector info+ indent-guide hybrid-mode hungry-delete hl-todo highlight-parentheses highlight-numbers highlight-indentation helm-xref helm-themes helm-swoop helm-purpose helm-projectile helm-org helm-mode-manager helm-make helm-ls-git helm-flx helm-descbinds helm-ag google-translate golden-ratio font-lock+ flycheck-package flycheck-elsa flx-ido fancy-battery eyebrowse expand-region evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-textobj-line evil-surround evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-lisp-state evil-lion evil-indent-plus evil-iedit-state evil-goggles evil-exchange evil-escape evil-ediff evil-easymotion evil-collection evil-cleverparens evil-args evil-anzu eval-sexp-fu emr elisp-slime-nav editorconfig dumb-jump drag-stuff dotenv-mode dired-quick-sort diminish devdocs define-word column-enforce-mode clean-aindent-mode centered-cursor-mode auto-highlight-symbol auto-compile aggressive-indent ace-link ace-jump-helm-line)))
+   '(lsp-metals scala-mode sbt-mode yapfify stickyfunc-enhance sphinx-doc pytest pyenv-mode pydoc py-isort poetry transient pippel pipenv pyvenv pip-requirements nose lsp-python-ms lsp-pyright live-py-mode importmagic epc ctable concurrent deferred helm-pydoc helm-gtags helm-cscope xcscope ggtags dap-mode bui cython-mode counsel-gtags counsel swiper ivy company-anaconda blacken anaconda-mode pythonic haskell-mode ws-butler writeroom-mode winum which-key volatile-highlights vi-tilde-fringe uuidgen use-package undo-tree treemacs-projectile treemacs-persp treemacs-icons-dired treemacs-evil toc-org symon symbol-overlay string-inflection string-edit spaceline-all-the-icons restart-emacs request rainbow-delimiters quickrun popwin pcre2el password-generator paradox overseer org-superstar open-junk-file nameless multi-line macrostep lorem-ipsum link-hint inspector info+ indent-guide hybrid-mode hungry-delete hl-todo highlight-parentheses highlight-numbers highlight-indentation helm-xref helm-themes helm-swoop helm-purpose helm-projectile helm-org helm-mode-manager helm-make helm-ls-git helm-flx helm-descbinds helm-ag google-translate golden-ratio font-lock+ flycheck-package flycheck-elsa flx-ido fancy-battery eyebrowse expand-region evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-textobj-line evil-surround evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-lisp-state evil-lion evil-indent-plus evil-iedit-state evil-goggles evil-exchange evil-escape evil-ediff evil-easymotion evil-collection evil-cleverparens evil-args evil-anzu eval-sexp-fu emr elisp-slime-nav editorconfig dumb-jump drag-stuff dotenv-mode dired-quick-sort diminish devdocs define-word column-enforce-mode clean-aindent-mode centered-cursor-mode auto-highlight-symbol auto-compile aggressive-indent ace-link ace-jump-helm-line)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
