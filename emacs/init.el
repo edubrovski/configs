@@ -10,9 +10,6 @@
 ;; Set up the visible bell
 (setq visible-bell t)
 
-(column-number-mode)
-(global-display-line-numbers-mode t)
-
 (load-theme 'tango-dark)
 
 ;; Make ESC quit prompts
@@ -40,6 +37,9 @@
       use-package-always-ensure t
       backup-directory-alist `((".*" . ,temporary-file-directory))
       auto-save-file-name-transforms `((".*" ,temporary-file-directory t)))
+
+(column-number-mode)
+(global-display-line-numbers-mode t)
 
 (use-package command-log-mode
   :commands command-log-mode)
