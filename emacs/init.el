@@ -7,7 +7,7 @@
 
 (menu-bar-mode -1)            ; Disable the menu bar
 
-;; Set up the visible bell
+;; Желтый треугольник посередине
 (setq visible-bell t)
 
 (load-theme 'tango-dark)
@@ -30,8 +30,9 @@
   (package-install 'use-package))
 
 (require 'use-package)
-(setq use-package-always-ensure t)
+(setq use-package-always-ensure t) ;; всегда устанавливать пэкеджи, если они не установлены. вроде как автоматически обновляться пэкэджи не должны из-за этого
 
+;; Enable line numbers
 (column-number-mode)
 (global-display-line-numbers-mode t)
 
@@ -40,19 +41,27 @@
                 term-mode-hook
                 shell-mode-hook
                 treemacs-mode-hook
-                eshell-mode-hook))
+                eshell-mode-hook
+		helpful-mode-hook))
   (add-hook mode (lambda () (display-line-numbers-mode 0))))
 
+;; справа появляется буфер, в котором логируются команды
+;; Usage:
+;; M-x command-log-mode
+;; M-x clm/toggle-command-log-buffer
 (use-package command-log-mode
   :commands command-log-mode)
 
+;; TODO: убрать дебильные иероглифы
 (use-package doom-modeline
   :init (doom-modeline-mode 1)
   :custom ((doom-modeline-height 15)))
 
+;; Разноцветные скобки
 (use-package rainbow-delimiters
   :hook (prog-mode . rainbow-delimiters-mode))
 
+;; Autocomplete package. The main alternative is Helm.
 (use-package ivy
   :diminish
   :bind (("C-s" . swiper)
@@ -76,6 +85,7 @@
   :config
   (ivy-rich-mode))
 
+;; Что-то для ivy
 (use-package counsel
   :bind (("C-M-j" . 'counsel-switch-buffer)
          :map minibuffer-local-map
@@ -85,6 +95,7 @@
   :config
   (counsel-mode 1))
 
+;; еще что-то для ivy
 (use-package ivy-prescient
   :after counsel
   :custom
@@ -95,7 +106,7 @@
   (ivy-prescient-mode 1))  
 
 
-;; For defining keybindings
+;; Convenient keybindings
 (use-package general
   :after evil
   :config
@@ -105,6 +116,7 @@
     :global-prefix "C-SPC")
 )
 
+;; При нажатии префикса (например C-x) через заданное время показывает доступные keybindings
 (use-package which-key
   :defer 0
   :diminish which-key-mode
@@ -112,6 +124,7 @@
   (which-key-mode)
   (setq which-key-idle-delay 0.4))
 
+;; Улучшенная документация
 (use-package helpful
   :commands (helpful-callable helpful-variable helpful-command helpful-key)
   :custom
