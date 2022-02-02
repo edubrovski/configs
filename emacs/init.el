@@ -123,4 +123,11 @@
   ([remap describe-variable] . counsel-describe-variable)
   ([remap describe-key] . helpful-key))
 
+;; Отключаем Customize. Без этой строчки в конец файла будет добавляться custom-set-variables.
 (setq-default custom-file null-device)
+
+;; убираем '##' файлы в отдельную папку
+(setq
+   create-lockfiles nil
+   backup-directory-alist `((".*" . ,temporary-file-directory))
+   auto-save-file-name-transforms `((".*" ,temporary-file-directory t)))
