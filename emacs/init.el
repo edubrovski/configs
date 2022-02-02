@@ -30,13 +30,7 @@
   (package-install 'use-package))
 
 (require 'use-package)
-
-;; Enable defer and ensure by default for use-package
-;; Keep auto-save/backup files separate from source code:  https://github.com/scalameta/metals/issues/1027
-(setq ;use-package-always-defer t; хз что это, скопипастил из документации metals. не понимаю в чем смысл одновременно использовать defer и ensure, как они должны вместе сочетаться? и какое дефолтное поведение?
-      ; use-package-always-ensure t
-      ;backup-directory-alist `((".*" . ,temporary-file-directory))
-      ;auto-save-file-name-transforms `((".*" ,temporary-file-directory t)))
+(setq use-package-always-ensure t)
 
 (column-number-mode)
 (global-display-line-numbers-mode t)
@@ -80,7 +74,6 @@
 (use-package ivy-rich
   :after (ivy counsel)
   :config
-  (message "hi from message")
   (ivy-rich-mode))
 
 (use-package counsel
@@ -118,9 +111,6 @@
   :config
   (which-key-mode)
   (setq which-key-idle-delay 0.4))
-
-(message "HI FROM init.el 0")
-
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
