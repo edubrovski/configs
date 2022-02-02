@@ -159,3 +159,11 @@
 ;; All files should be autosaved to disk
 (auto-save-visited-mode t)
 
+(use-package evil
+  :init
+  (setq evil-want-integration t)
+  (setq evil-want-keybinding nil)
+  (setq evil-want-C-u-scroll t)
+  (setq evil-want-C-i-jump nil)
+  :config
+  (evil-mode 1))
