@@ -152,3 +152,10 @@
                     :height 180
                     :weight 'normal
                     :width 'normal)
+
+;; When files get changed on disk buffers should get reverted automatically
+(global-auto-revert-mode t)
+
+;; All files should be autosaved to disk
+(auto-save-visited-mode t)
+
