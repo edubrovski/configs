@@ -87,7 +87,7 @@
 
 ;; Что-то для ivy
 (use-package counsel
-  :bind (("C-M-j" . 'counsel-switch-buffer)
+  :bind (("C-<tab>" . 'counsel-switch-buffer)
          :map minibuffer-local-map
          ("C-r" . 'counsel-minibuffer-history))
   :custom
