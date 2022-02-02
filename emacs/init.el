@@ -33,16 +33,31 @@
 
 ;; Enable defer and ensure by default for use-package
 ;; Keep auto-save/backup files separate from source code:  https://github.com/scalameta/metals/issues/1027
-(setq use-package-always-defer t
-      use-package-always-ensure t
-      backup-directory-alist `((".*" . ,temporary-file-directory))
-      auto-save-file-name-transforms `((".*" ,temporary-file-directory t)))
+(setq ;use-package-always-defer t; хз что это, скопипастил из документации metals. не понимаю в чем смысл одновременно использовать defer и ensure, как они должны вместе сочетаться? и какое дефолтное поведение?
+      ; use-package-always-ensure t
+      ;backup-directory-alist `((".*" . ,temporary-file-directory))
+      ;auto-save-file-name-transforms `((".*" ,temporary-file-directory t)))
 
 (column-number-mode)
 (global-display-line-numbers-mode t)
 
+;; Disable line numbers for some modes
+(dolist (mode '(org-mode-hook
+                term-mode-hook
+                shell-mode-hook
+                treemacs-mode-hook
+                eshell-mode-hook))
+  (add-hook mode (lambda () (display-line-numbers-mode 0))))
+
 (use-package command-log-mode
   :commands command-log-mode)
+
+(use-package doom-modeline
+  :init (doom-modeline-mode 1)
+  :custom ((doom-modeline-height 15)))
+
+(use-package rainbow-delimiters
+  :hook (prog-mode . rainbow-delimiters-mode))
 
 (use-package ivy
   :diminish
@@ -64,8 +79,9 @@
 
 (use-package ivy-rich
   :after (ivy counsel)
-  :init
-  (ivy-rich-mode 1))
+  :config
+  (message "hi from message")
+  (ivy-rich-mode))
 
 (use-package counsel
   :bind (("C-M-j" . 'counsel-switch-buffer)
@@ -83,7 +99,7 @@
   :config
   ;; Uncomment the following line to have sorting remembered across sessions!
   ;(prescient-persist-mode 1)
-  (ivy-prescient-mode 1))
+  (ivy-prescient-mode 1))  
 
 
 ;; For defining keybindings
@@ -95,3 +111,27 @@
     :prefix "SPC"
     :global-prefix "C-SPC")
 )
+
+(use-package which-key
+  :defer 0
+  :diminish which-key-mode
+  :config
+  (which-key-mode)
+  (setq which-key-idle-delay 0.4))
+
+(message "HI FROM init.el 0")
+
+
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(package-selected-packages
+   '(which-key yasnippet use-package sbt-mode rainbow-delimiters lsp-ui lsp-metals ivy-rich ivy-prescient general flycheck doom-modeline counsel company command-log-mode)))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
