@@ -149,7 +149,7 @@
 ;; Set default font
 (set-face-attribute 'default nil
                     :family "Monaco"
-                    :height 180
+                    :height 150
                     :weight 'normal
                     :width 'normal)
 
