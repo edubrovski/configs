@@ -168,6 +168,23 @@
   :config
   (evil-mode 1))
 
+(use-package projectile
+  :diminish projectile-mode
+  :config (projectile-mode)
+  :custom ((projectile-completion-system 'ivy))
+  :bind-keymap
+  ("C-c p" . projectile-command-map)
+  :init
+  ;; NOTE: Set this to the folder where you keep your Git repos!
+  (when (file-directory-p "~/proj")
+    (setq projectile-project-search-path '("~/proj")))
+  (setq projectile-switch-project-action #'projectile-dired))
+
+(use-package counsel-projectile
+  :after projectile
+  :config (counsel-projectile-mode))
+
+;; ============ IDE functionality ================================================== 
 
 ;; Enable scala-mode for highlighting, indentation and motion commands
 (use-package scala-mode
