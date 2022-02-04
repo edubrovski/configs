@@ -168,6 +168,11 @@
   :config
   (evil-mode 1))
 
+(use-package evil-collection
+  :after evil
+  :config
+  (evil-collection-init))
+
 (use-package projectile
   :diminish projectile-mode
   :config (projectile-mode)
@@ -183,6 +188,9 @@
 (use-package counsel-projectile
   :after projectile
   :config (counsel-projectile-mode))
+
+(use-package magit
+  :commands magit-status)
 
 ;; ============ IDE functionality ================================================== 
 
