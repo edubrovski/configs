@@ -182,7 +182,7 @@
   :init
   ;; NOTE: Set this to the folder where you keep your Git repos!
   (when (file-directory-p "~/proj")
-    (setq projectile-project-search-path '("~/proj")))
+    (setq projectile-project-search-path '("~/proj" "~/proj/edubrovski" "~/proj/e.dubrovskiy" "~/my-configs")))
   (setq projectile-switch-project-action #'projectile-dired))
 
 (use-package counsel-projectile
