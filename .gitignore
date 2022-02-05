@@ -1,3 +1,4 @@
 .DS_Store
 emacs/elpa/archives/melpa/archive-contents
 emacs/elpa/archives/elpa/archive-contents
+emacs/flycheck-init.el

@@ -182,6 +182,7 @@
   :init
   ;; NOTE: Set this to the folder where you keep your Git repos!
   (when (file-directory-p "~/proj")
+    ;; Use projectile-add-known-project to interactively add a new project
     (setq projectile-project-search-path '("~/proj" "~/proj/edubrovski" "~/proj/e.dubrovskiy" "~/my-configs")))
   (setq projectile-switch-project-action #'projectile-dired))
 
