@@ -149,7 +149,7 @@
 ;; Set default font
 (set-face-attribute 'default nil
                     :family "Monaco"
-                    :height 150
+                    :height 180
                     :weight 'normal
                     :width 'normal)
 
@@ -192,6 +192,8 @@
 
 (use-package magit
   :commands magit-status)
+
+(add-to-list 'exec-path "/usr/local/bin/")
 
 ;; ============ IDE functionality ================================================== 
 
@@ -262,4 +264,3 @@
   (lsp-mode . dap-mode)
   (lsp-mode . dap-ui-mode)
   )
-
