@@ -190,6 +190,10 @@
   :after projectile
   :config (counsel-projectile-mode))
 
+;; checkout one file from specific branch - via reset: O-f
+;; checkout one file from specific commit - no idea how to it with magit, use
+;; git checkout c5f567 -- file1/to/restore file2/to/restore
+;; To cherry pick a commit use A h (magit-cherry-harvest)
 (use-package magit
   :commands magit-status)
 
