@@ -1,3 +1,5 @@
+;; C-x 5 2 to open another frame; C-x 5 o to switch between frames
+
 (setq inhibit-startup-message t)
 
 (scroll-bar-mode -1)        ; Disable visible scrollbar
