@@ -141,12 +141,18 @@
 ;; Отключаем Customize. Без этой строчки в конец файла будет добавляться custom-set-variables.
 (setq-default custom-file null-device)
 
-;; убираем '##' файлы в отдельную папку
-(setq
-   create-lockfiles nil
-   backup-directory-alist `((".*" . ,temporary-file-directory))
-   auto-save-file-name-transforms `((".*" ,temporary-file-directory t)))
+;; https://github.com/bbatsov/super-save
+(use-package super-save
+  :ensure t
+  :config
+  (super-save-mode +1)
+  (setq super-save-auto-save-when-idle t))
 
+;; disable build-in auto-save mode
+(setq auto-save-default nil)
+
+;; All files should be autosaved to disk
+(auto-save-visited-mode t)
 
 ;; Set default font
 (set-face-attribute 'default nil
@@ -157,9 +163,6 @@
 
 ;; When files get changed on disk buffers should get reverted automatically
 (global-auto-revert-mode t)
-
-;; All files should be autosaved to disk
-(auto-save-visited-mode t)
 
 (use-package evil
   :init
