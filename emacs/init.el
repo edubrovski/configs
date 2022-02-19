@@ -1,3 +1,5 @@
+;; C-x 5 2 to open another frame; C-x 5 o to switch between frames
+
 (setq inhibit-startup-message t)
 
 (scroll-bar-mode -1)        ; Disable visible scrollbar
@@ -149,7 +151,7 @@
 ;; Set default font
 (set-face-attribute 'default nil
                     :family "Monaco"
-                    :height 150
+                    :height 180
                     :weight 'normal
                     :width 'normal)
 
@@ -169,6 +171,38 @@
   :config
   (evil-mode 1))
 
+(use-package evil-collection
+  :after evil
+  :config
+  (evil-collection-init))
+
+(use-package projectile
+  :diminish projectile-mode
+  :config (projectile-mode)
+  :custom ((projectile-completion-system 'ivy))
+  :bind-keymap
+  ("C-c p" . projectile-command-map)
+  :init
+  ;; NOTE: Set this to the folder where you keep your Git repos!
+  (when (file-directory-p "~/proj")
+    ;; Use projectile-add-known-project to interactively add a new project
+    (setq projectile-project-search-path '("~/proj" "~/proj/edubrovski" "~/proj/e.dubrovskiy" "~/my-configs")))
+  (setq projectile-switch-project-action #'projectile-dired))
+
+(use-package counsel-projectile
+  :after projectile
+  :config (counsel-projectile-mode))
+
+;; checkout one file from specific branch - via reset: O-f
+;; checkout one file from specific commit - no idea how to it with magit, use
+;; git checkout c5f567 -- file1/to/restore file2/to/restore
+;; To cherry pick a commit use A h (magit-cherry-harvest)
+(use-package magit
+  :commands magit-status)
+
+(add-to-list 'exec-path "/usr/local/bin/")
+
+;; ============ IDE functionality ================================================== 
 
 ;; Enable scala-mode for highlighting, indentation and motion commands
 (use-package scala-mode
@@ -237,4 +271,3 @@
   (lsp-mode . dap-mode)
   (lsp-mode . dap-ui-mode)
   )
-
