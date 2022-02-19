@@ -158,6 +158,7 @@
 
 ;; All files should be autosaved to disk
 (auto-save-visited-mode t)
+(add-to-list 'window-buffer-change-functions (lambda (_) (save-buffer))) ;; this is somewhat experimental, delete this if it slows emacs down too much
 
 (use-package evil
   :init
