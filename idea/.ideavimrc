@@ -1,6 +1,9 @@
 map gc :action GotoClass<CR>
 map gi :action GotoImplementation<CR>
+map gp :action OpenProjectWindows<CR>
 map gf :action Forward<CR>
 map gb :action Back<CR>
 map gu :action GotoSuperMethod<CR>
 map t :action SelectInProjectView<CR>
+set clipboard+=unnamed
+
