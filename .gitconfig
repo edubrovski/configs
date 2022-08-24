@@ -1,0 +1,19 @@
+[user]
+	user = Eduard Dubrovskiy
+	email = dubrovskieddie@gmail.com
+	name = Eduard Dubrovskiy
+[alias]
+	co = checkout
+	br = branch
+	ci = commit
+	st = status
+[pager]
+	branch = false
+	log = false
+[gitreview]
+	remote = origin
+	username = tkma27y
+[pull]
+	rebase = false
+[init]
+	defaultBranch = main
