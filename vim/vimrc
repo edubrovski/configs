@@ -1,18 +1,12 @@
-" Specify a directory for plugins
-" - For Neovim: ~/.local/share/nvim/plugged
-" - Avoid using standard Vim directory names like 'plugin'
-call plug#begin('~/.vim/plugged')
+set number
+filetype plugin indent on
+syntax on
 
-Plug 'lervag/vimtex' " editing LaTex files
+" yank to clipboard
+if has("clipboard")
+  set clipboard=unnamed " copy to the system clipboard
 
-call plug#end()
-
-execute pathogen#infect()
-
-:set number
-:set splitright
-:set tabstop=4
-:set shiftwidth=4
-:set expandtab
-
-map <C-n> :NERDTreeToggle<CR>
+  if has("unnamedplus") " X11 support
+    set clipboard+=unnamedplus
+  endif
+endif
