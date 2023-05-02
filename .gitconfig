@@ -1,9 +1,10 @@
 [user]
 	user = Eduard Dubrovskiy
-	email = dubrovskieddie@gmail.com
-	name = Eduard Dubrovskiy
+	email = edubrovskii@evolution.com
+	name = Eduard Dubrovsky
 [alias]
 	co = checkout
+	cp = cherry-pick
 	br = branch
 	ci = commit
 	st = status

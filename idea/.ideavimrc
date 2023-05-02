@@ -4,6 +4,14 @@ map gp :action OpenProjectWindows<CR>
 map gf :action Forward<CR>
 map gb :action Back<CR>
 map gu :action GotoSuperMethod<CR>
+map fu :action FindUsages<CR>
 map t :action SelectInProjectView<CR>
+
+map [i :action ImportProject<CR>
+map [r :action ManageRecentProjects<CR>
+
+map fy :action CopyPathFromRepositoryRootProvider<CR>
+
+" for normal copypasting
 set clipboard+=unnamed
 
