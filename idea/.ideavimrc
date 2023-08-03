@@ -12,6 +12,8 @@ map [r :action ManageRecentProjects<CR>
 
 map fy :action CopyPathFromRepositoryRootProvider<CR>
 
+map = :action ReformatCode<CR>
+
 " for normal copypasting
 set clipboard+=unnamed
 
