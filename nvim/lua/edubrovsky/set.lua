@@ -20,3 +20,6 @@ vim.opt.termguicolors = true
 vim.opt.scrolloff = 8
 
 vim.g.mapleader = " "
+
+vim.opt.clipboard = "unnamed"
+
