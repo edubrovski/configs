@@ -1,3 +1,3 @@
-require ("edubrovsky.remap")
-require ("edubrovsky.set")
+require ("edubrovsky")
+require ("edubrovsky")
 

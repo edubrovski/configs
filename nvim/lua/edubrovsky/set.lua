@@ -23,3 +23,5 @@ vim.g.mapleader = " "
 
 vim.opt.clipboard = "unnamed"
 
+vim.opt_global.shortmess:remove("F") -- Metals doc recommends this
+
