@@ -115,6 +115,11 @@ _G.packer_plugins = {
     path = "/Users/edubrovsky/.local/share/nvim/site/pack/packer/start/nvim-lspconfig",
     url = "https://github.com/neovim/nvim-lspconfig"
   },
+  ["nvim-metals"] = {
+    loaded = true,
+    path = "/Users/edubrovsky/.local/share/nvim/site/pack/packer/start/nvim-metals",
+    url = "https://github.com/scalameta/nvim-metals"
+  },
   ["nvim-treesitter"] = {
     loaded = true,
     path = "/Users/edubrovsky/.local/share/nvim/site/pack/packer/start/nvim-treesitter",

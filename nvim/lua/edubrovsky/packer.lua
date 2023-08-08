@@ -35,6 +35,11 @@ return require('packer').startup(function(use)
 	  }
   }
 
+  use {
+      'scalameta/nvim-metals',
+      requires = { "nvim-lua/plenary.nvim" }
+  }
+
   use({
       "Pocco81/auto-save.nvim",
       config = function()
