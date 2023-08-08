@@ -3,8 +3,8 @@ local lsp = require("lsp-zero")
 lsp.preset("recommended")
 
 lsp.ensure_installed({
-    'pyright',
-    'black',
+    'pyright', -- Python LS
+    'gopls', -- Go LS
     'tsserver',
     'rust_analyzer',
 })
