@@ -12,7 +12,7 @@ return require('packer').startup(function(use)
 	  requires = { {'nvim-lua/plenary.nvim'} }
   }
 
-  use { 
+  use {
 	  'nvim-treesitter/nvim-treesitter',
 	  run = ':TSUpdate'
   }
@@ -49,7 +49,7 @@ return require('packer').startup(function(use)
       end,
   })
 
-  -- use { "folke/tokyonight.nvim", as = "tokyonight" }
+  use { "folke/tokyonight.nvim", as = "tokyonight" }
 
   use { "catppuccin/nvim", as = "catppuccin" }
 
