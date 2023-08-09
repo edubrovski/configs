@@ -1,0 +1,2 @@
+# This is for GitHub to not set the language of repo to Emacs lisp
+*.el linguist-detectable=false
