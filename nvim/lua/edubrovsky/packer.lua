@@ -49,8 +49,5 @@ return require('packer').startup(function(use)
       end,
   })
 
-  use({
-      'rose-pine/neovim',
-      as = 'rose-pine',
-  })
+  use { "ellisonleao/gruvbox.nvim" }
 end)
