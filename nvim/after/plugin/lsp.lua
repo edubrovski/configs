@@ -44,6 +44,7 @@ lsp.on_attach(function(client, bufnr)
 
   vim.keymap.set("n", "gd", function() vim.lsp.buf.definition() end, opts)
   vim.keymap.set("n", "K", function() vim.lsp.buf.hover() end, opts)
+  vim.keymap.set("v", "K", function() vim.lsp.buf.hover() end, opts)
   vim.keymap.set("n", "<leader>vws", function() vim.lsp.buf.workspace_symbol() end, opts)
   vim.keymap.set("n", "<leader>vd", function() vim.diagnostic.open_float() end, opts)
   vim.keymap.set("n", "[d", function() vim.diagnostic.goto_next() end, opts)
@@ -60,6 +61,9 @@ lsp.on_attach(function(client, bufnr)
   vim.keymap.set("n", "<leader>xq", function() require("trouble").open("quickfix") end)
   vim.keymap.set("n", "<leader>xl", function() require("trouble").open("loclist") end)
   vim.keymap.set("n", "gR", function() require("trouble").open("lsp_references") end)
+
+  vim.keymap.set('n', '<leader>ce', ':Copilot enable<CR>')
+  vim.keymap.set('n', '<leader>cd', ':Copilot disable<CR>')
 end)
 
 lsp.setup()

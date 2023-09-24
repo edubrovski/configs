@@ -59,6 +59,8 @@ return require('packer').startup(function(use)
       end,
   })
 
+  use { 'github/copilot.vim', branch = 'release' }
+
   use { "folke/tokyonight.nvim", as = "tokyonight" }
 
   use { "catppuccin/nvim", as = "catppuccin" }
